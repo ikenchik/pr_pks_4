@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr_pks_4/components/product_page.dart';
 import 'package:pr_pks_4/models/product.dart';
 import 'package:pr_pks_4/pages/add_product_page.dart';
 
@@ -13,21 +14,15 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   void navigateToAddProductPage(BuildContext context) async{
-    final result = await Navigator.push(context,
+    final Product result = await Navigator.push(context,
       MaterialPageRoute(builder: (context) => const addProductPage()),
     );
 
-    if (result != null && result.isNotEmpty){
+    if (result != null){
       setState(() {
         products.add(result);
       });
     }
-  }
-
-  void _removeProduct(int index){
-    setState(() {
-      products.removeAt(index);
-    });
   }
 
   @override
@@ -37,18 +32,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
         title: const Text("Добавленные товары"),
       ),
       body: products.isEmpty
-        ? const Center(child: Text("Нет добавленных товаров"),)
+          ? const Center(child: Text("Нет добавленных товаров"),)
           : ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (context, index){
-          return ListTile(
-            title: Text(products[index].toString()),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete_outline_outlined),
-              onPressed: () => _removeProduct(index),
-            ),
-          );
-        }
+          itemCount: products.length,
+          itemBuilder: (context, index){
+            return ItemProduct(products: products[index]);
+          }
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => navigateToAddProductPage(context),
