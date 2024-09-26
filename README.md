@@ -1,16 +1,10 @@
 # pr_pks_4
+### Юшкин Илья Андреевич
+### ЭФБО-04-22
+Реализация функционала добавления товаров на торговую площадку, их просмотра и отображения.
+Тестирование выполнено на физическом устройстве Google Pixel 7 pro.
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+https://github.com/user-attachments/assets/ebb212c6-f014-466f-a2d0-0f3b91ec662e
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
