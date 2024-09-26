@@ -47,60 +47,91 @@ class _addProductPageState extends State<addProductPage> {
       appBar: AppBar(
         title: const Text("Добавление товара"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: productTitleController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Введите название товара",
-                labelText: "Название",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: productTitleController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  hintText: "Введите название товара",
+                  labelText: "Название",
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
-            ),
-            TextField(
-              controller: productImageController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Введите ссылку на изображение",
-                labelText: "Ссылка",
+              SizedBox(height: 16),
+              TextField(
+                controller: productImageController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  hintText: "Введите ссылку на изображение",
+                  labelText: "Ссылка",
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
-            ),
-            TextField(
-              controller: productPriceController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Введите стоимость товара",
-                labelText: "Стоимость",
+              SizedBox(height: 16),
+              TextField(
+                controller: productPriceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  hintText: "Введите стоимость товара",
+                  labelText: "Стоимость",
+                ),
+                maxLines: 1,
               ),
-              maxLines: 1,
-            ),
-            TextField(
-              controller: productAboutController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Введите описание товара",
-                labelText: "Описание",
+              SizedBox(height: 16),
+              TextField(
+                controller: productAboutController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  hintText: "Введите описание товара",
+                  labelText: "Описание",
+                ),
+                maxLines: 7,
               ),
-              maxLines: 7,
-            ),
-            TextField(
-              controller: productSpecificationController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Введите характеристики товара",
-                labelText: "Характеристики",
+              SizedBox(height: 16),
+              TextField(
+                controller: productSpecificationController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  hintText: "Введите характеристики товара",
+                  labelText: "Характеристики",
+                ),
+                maxLines: 7,
               ),
-              maxLines: 7,
-            ),
-            ElevatedButton(
-              onPressed: createProduct,
-              child: Text("Добавить товар"),
-            ),
-          ],
+              SizedBox(height: 16),
+        
+              //кнопка перехода к методу создания экземпляра класса Product
+              ElevatedButton(
+                onPressed: createProduct,
+                child: Text("Добавить товар",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amberAccent,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  minimumSize: const Size(300, 50),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

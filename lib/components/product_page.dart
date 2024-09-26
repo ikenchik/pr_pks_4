@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pr_pks_4/models/product.dart';
-import 'package:pr_pks_4/pages/home_page.dart';
 
 class ItemProduct extends StatefulWidget {
   final Product products;
+  final int index;
+  final Function(int) removeProduct;
 
-  const ItemProduct({super.key, required this.products});
-
+  const ItemProduct({super.key, required this.products, required this.index, required this.removeProduct});
 
   @override
   State<ItemProduct> createState() => _ItemProductState();
@@ -14,30 +14,106 @@ class ItemProduct extends StatefulWidget {
 
 class _ItemProductState extends State<ItemProduct> {
 
-  void _removeProduct(int index){
-    setState(() {
-      products.removeAt(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(16),
-      color: const Color.fromARGB(234, 213, 208, 208),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Center(
-            child: Text(
-              widget.products.productTitle
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: const Color.fromARGB(234, 213, 208, 208),
+        ),
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height * 0.6,
+        child: Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.delete_sweep_sharp),
+              onPressed: (){
+                widget.removeProduct(widget.index);
+              },
             ),
-          ),
-          Center(child: Image.network(widget.products.productImage),),
-          Center(child: Text('${widget.products.productPrice}'),),
-          Center(child: Text(widget.products.productAbout),),
-          Center(child: Text(widget.products.productSpecifications),),
-        ],
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Center(
+                      child: Text(
+                        widget.products.productTitle,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Image.network(
+                        widget.products.productImage,
+                        height: 265,
+                        width: 300,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        '${widget.products.productPrice}₽',
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        const Text(
+                          'Описание',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(widget.products.productAbout),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Text(
+                          'Характеристики',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(widget.products.productSpecifications),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

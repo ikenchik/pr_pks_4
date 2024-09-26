@@ -25,21 +25,60 @@ class _ProductListScreenState extends State<ProductListScreen> {
     }
   }
 
+
+  void removeProduct(int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.amberAccent,
+          title: const Text('Подтверждение удаления'),
+          content: const Text('Вы уверены, что хотите удалить этот товар?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Отмена',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Удалить',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                setState(() {
+                  products.removeAt(index);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Добавленные товары"),
+        title: const Center(child: Text("Добавленные товары",
+          style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
       body: products.isEmpty
           ? const Center(child: Text("Нет добавленных товаров"),)
           : ListView.builder(
           itemCount: products.length,
           itemBuilder: (context, index){
-            return ItemProduct(products: products[index]);
+            return ItemProduct(products: products[index], index: index, removeProduct: removeProduct,);
           }
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amberAccent,
         onPressed: () => navigateToAddProductPage(context),
         child: Icon(Icons.add_box_rounded),
         tooltip: "Добавить товар",
